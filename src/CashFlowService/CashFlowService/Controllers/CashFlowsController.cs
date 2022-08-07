@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace CashFlowService.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [Route("api/[controller]")]    
     public class CashFlowsController : ControllerBase
     {
         private readonly ICashFlowManager _cashFlowManager;

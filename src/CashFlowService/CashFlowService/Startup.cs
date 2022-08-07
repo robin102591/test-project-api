@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System.Collections.Generic;
 
 namespace CashFlowService
 {
@@ -22,6 +24,16 @@ namespace CashFlowService
             services.AddControllers();
 
             services.AddScoped<ICashFlowManager, CashFlowManager>();
+
+            //swagger setup
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Cash Flow Service", Version = "v1" });
+                x.EnableAnnotations();
+                x.CustomSchemaIds(c => c.FullName);
+
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,6 +43,20 @@ namespace CashFlowService
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger(options =>
+            {
+                options.RouteTemplate = "swagger/{documentName}/swagger.json";
+                options.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+                {
+                    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer() { Url = "/" } };
+                });
+            });
+
+            app.UseSwaggerUI(option =>
+            {
+                option.SwaggerEndpoint("v1/swagger.json", "Cash Flow API");
+            });
 
             app.UseHttpsRedirection();
 

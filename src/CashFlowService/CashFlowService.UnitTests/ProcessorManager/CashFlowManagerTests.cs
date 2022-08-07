@@ -48,8 +48,7 @@ namespace CashFlowService.UnitTests.ProcessorManager
         private CashFlowRequest GetCashFlowRequest()
         {
             return new CashFlowRequest
-            {
-                InitialInvestment = 1000,
+            {                
                 DiscountRate = 10,
                 CashFlows = new List<CashFlow>()
                 {

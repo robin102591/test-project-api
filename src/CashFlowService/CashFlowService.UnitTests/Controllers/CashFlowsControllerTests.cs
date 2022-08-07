@@ -94,8 +94,7 @@ namespace CashFlowService.UnitTests.Controllers
         private CashFlowRequest GetMockValidCashFlowRequest()
         {
             return new CashFlowRequest
-            {
-                InitialInvestment = 1000,
+            {                
                 DiscountRate = 10,
                 CashFlows = new List<CashFlow>()
                 {

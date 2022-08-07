@@ -18,7 +18,7 @@ namespace CashFlowService.ProcessorManager
 
             cashFlowResponse.NetPresentValues = netPresentValue;
 
-            cashFlowResponse.TotalNetPresentValue = netPresentValue.Sum(npv => npv.PresentValue);
+            cashFlowResponse.TotalNetPresentValue = Math.Round(netPresentValue.Sum(npv => npv.PresentValue), 2);
 
             return cashFlowResponse;
         }
@@ -47,7 +47,7 @@ namespace CashFlowService.ProcessorManager
 
             var ratePerPeriod = Math.Pow(discount, (double)cashflow.Period);
 
-            return (decimal)((double)cashflow.Amount / ratePerPeriod);                      
+            return Math.Round((decimal)((double)cashflow.Amount / ratePerPeriod), 2);
         }
     }
 }

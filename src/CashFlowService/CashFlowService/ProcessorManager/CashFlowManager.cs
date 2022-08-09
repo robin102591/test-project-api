@@ -32,7 +32,7 @@ namespace CashFlowService.ProcessorManager
                     return new NetPresentValue
                     {
                         Period = cf.Period,
-                        CashFlowAmount = cf.Amount,
+                        CashFlowAmount = Math.Round(cf.Amount,2),
                         PresentValue = CalculateNetPresentValue(cf, discountRate)
                     };
 

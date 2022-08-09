@@ -34,6 +34,10 @@ namespace CashFlowService
 
             });
 
+            services.AddCors(option =>
+            {
+                option.AddPolicy("MyPolicy", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +47,8 @@ namespace CashFlowService
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("MyPolicy");
 
             app.UseSwagger(options =>
             {
@@ -66,6 +72,8 @@ namespace CashFlowService
             {
                 endpoints.MapControllers();
             });
+
+            
         }
     }
 }
